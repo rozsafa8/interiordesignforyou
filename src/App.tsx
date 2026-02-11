@@ -4,7 +4,7 @@ import {ArrowRight, Instagram, MapPin, MessageCircle} from 'lucide-react'
 import {Button} from './components/ui/button'
 import {contact, designer, projects} from './data'
 import {useEffect} from "react";
-import * as Sentry from "@sentry/react";
+import {captureMessage} from "./telemetry";
 
 const easing = [0.22, 1, 0.36, 1] as const
 
@@ -98,8 +98,8 @@ function ProjectCard({project}: { project: Project }) {
 
 function App() {
   useEffect(() => {
-    Sentry.captureMessage('page-visit');
-  })
+    captureMessage('page-visit');
+  }, [])
 
   return (
     <div className="min-h-screen text-[var(--ink)]">
@@ -121,7 +121,7 @@ function App() {
               Contact
             </a>
           </nav>
-          <Button asChild variant="outline" size="sm" onClick={() => Sentry.captureMessage('book-a-consult-click')}>
+          <Button asChild variant="outline" size="sm" onClick={() => captureMessage('book-a-consult-click')}>
             <a href={contact.whatsappLink} target="_blank" rel="noreferrer">
               Book a consult
             </a>
@@ -153,7 +153,7 @@ function App() {
                   </a>
                 </Button>
                 <Button asChild variant="secondary" size="lg"
-                        onClick={() => Sentry.captureMessage('contact-whatsapp-click')}>
+                        onClick={() => captureMessage('contact-whatsapp-click')}>
                   <a href={contact.whatsappLink} target="_blank" rel="noreferrer">
                     <MessageCircle size={18}/> Contact on WhatsApp
                   </a>
@@ -272,7 +272,7 @@ function App() {
                       size="lg"
                       variant="outline"
                       className="border-white/30 bg-white text-[var(--ink)] hover:bg-white/90"
-                      onClick={() => Sentry.captureMessage('phone-number-click')}
+                      onClick={() => captureMessage('phone-number-click')}
                     >
                       <a href={contact.whatsappLink} target="_blank" rel="noreferrer">
                         <MessageCircle size={18}/> {contact.whatsappDisplay}
@@ -286,7 +286,7 @@ function App() {
                     <p className="text-xs uppercase tracking-[0.3em] text-white/60">Email</p>
                     <a className="text-sm text-white/90"
                        href={`mailto:${contact.email}`}
-                       onClick={() => Sentry.captureMessage('contact-email-click')}
+                       onClick={() => captureMessage('contact-email-click')}
                     >
                       {contact.email}
                     </a>
@@ -302,7 +302,7 @@ function App() {
                       href={contact.instagram}
                       target="_blank"
                       rel="noreferrer"
-                      onClick={() => Sentry.captureMessage('instagram-click')}
+                      onClick={() => captureMessage('instagram-click')}
                     >
                       <Instagram size={16}/> {contact.instagramHandle}
                     </a>
