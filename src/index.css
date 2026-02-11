@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --canvas: #f5f1ea;
+  --stone: #e6ded1;
+  --sand: #f0e7da;
+  --olive: #a7b39a;
+  --ink: #2b2724;
+  --muted: #6b6259;
+  --stroke: rgba(43, 39, 36, 0.15);
+  --overlay: rgba(43, 39, 36, 0.72);
+  --glow: rgba(167, 179, 154, 0.35);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Manrope', system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 780px at 10% -15%, #e8dfd4 0%, rgba(232, 223, 212, 0) 60%),
+    radial-gradient(900px 640px at 90% 0%, #dde5da 0%, rgba(221, 229, 218, 0) 55%),
+    radial-gradient(880px 620px at 35% 95%, #efe7db 0%, rgba(239, 231, 219, 0) 50%),
+    var(--canvas);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
