@@ -25,37 +25,37 @@ export const projects = [
     {
         title: 'Interior Rework',
         descriptor: 'Villa, Springs, Dubai',
-        summary: 'Compact living reimagined with modular storage, warm stone, and sculptural lighting.',
+        summary: 'A carefully planned upgrade refreshed the villa, repurposing some existing furniture along the way. Walls, furnishings, and decorative details were enhanced to craft a cohesive, elegant atmosphere.',
         image: projectTwo,
     },
     {
         title: 'Full Renovation',
         descriptor: 'One bedroom apartment, JVC',
-        summary: 'Soft limewashed walls, linen textures, and custom oak millwork anchor a serene open plan.',
+        summary: 'Designed as an investment, yet full of charm for any potential buyer. Natural tones and textural details — white boucle sofa and wood-effect panels — make the living room irresistibly inviting.',
         image: projectOne,
     },
     {
         title: 'Design from Scratch',
         descriptor: 'One bedroom apartment, Europe',
-        summary: 'A grounded palette of sandstone and walnut pairs with artisan tilework for daily rituals.',
+        summary: 'With limited space, the kitchen had to remain compact yet highly efficient. We aimed for maximum functionality while creating a warm, elegant design.',
         image: projectThree,
     },
     {
         title: 'Retail Transformation',
         descriptor: 'Clinique, Europe',
-        summary: 'Indoor-outdoor continuity using handwoven textiles, muted greens, and bespoke cabinetry.',
+        summary: 'Complete interior transformation from former retail store into a body treatment clinic. New finishes, refined materials and textures — enhanced by lighting — create a calm, relaxing atmosphere.',
         image: projectFour,
     },
     {
         title: 'Interior Rework',
         descriptor: 'One bedroom, Palm Jumeirah',
-        summary: 'An adaptive studio built around arched niches, reclaimed wood, and soft acoustic finishes.',
+        summary: 'Furniture refresh delivering a completely new design direction. A relaxed Balinese-inspired atmosphere brought to life.',
         image: projectSix,
     },
     {
         title: 'Off-Plan Furnishing',
         descriptor: 'One bedroom, JVT',
-        summary: 'A quiet retreat with layered neutrals, rounded silhouettes, and gallery-inspired lighting.',
+        summary: 'Right after handover, we completed the full furnishing and decoration of the apartment. Every detail was designed to make the space feel complete, cozy, and stylish. ',
         image: projectFive,
     },
 ]
