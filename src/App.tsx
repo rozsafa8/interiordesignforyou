@@ -149,7 +149,7 @@ function App() {
                 About the designer
               </div>
               <h2 className="text-3xl font-semibold text-[var(--ink)] sm:text-4xl">
-                <span className="font-serif">Design rooted in craft, guided by calm.</span>
+                <span className="font-serif">Designing interiors that capture mood, light, and life.</span>
               </h2>
               <p className="text-base text-[var(--muted)] sm:text-lg">{designer.bio}</p>
               <div className="space-y-3">
