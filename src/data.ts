@@ -155,7 +155,7 @@ export const projects = [
     },
 ]
 
-const whatsappNumber = '971501234567'
+const whatsappNumber = '971523226120'
 
 export const contact = {
     whatsappDisplay: '+971 52 322 6120',
