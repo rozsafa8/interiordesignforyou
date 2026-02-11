@@ -12,7 +12,7 @@ export const designer = {
     title: 'Founder, interia.uae',
     tagline: 'Warm, modern interiors shaped by light, craft, and calm.',
     intro:
-        'I design lived-in, layered spaces that feel effortless and personal. Each project blends timeless materials with contemporary clarity to support how you live now.',
+        'Designing spaces that are intimate, layered, and luxuriously lived-in is my passion. Each project blends refined materials, thoughtful details, and a welcoming atmosphere.',
     bio:
         'Veronika brings a boutique studio sensibility to every room. With a background in fashion and a love of artisan makers, she balances scale, texture, and movement to create interiors that feel both refined and welcoming.',
     values: ['Quiet luxury over trends', 'Thoughtful use of natural light', 'Details that age beautifully'],
