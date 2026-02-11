@@ -10,7 +10,7 @@ import approachPortrait from './assets/3B8BC17A-613C-4783-B624-31B0A3561F84.png'
 export const designer = {
     name: 'Design by Veronika',
     title: 'Founder, interia.uae',
-    tagline: 'Warm, modern interiors shaped by light, craft, and calm.',
+    tagline: 'Elegant, inviting interiors defined by texture, light, and timeless detail.',
     intro:
         'Designing spaces that are intimate, layered, and luxuriously lived-in is my passion. Each project blends refined materials, thoughtful details, and a welcoming atmosphere.',
     bio:
