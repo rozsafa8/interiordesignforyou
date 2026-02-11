@@ -25,6 +25,46 @@ const stagger = {
 }
 
 type Project = (typeof projects)[number]
+type ResponsiveImage = typeof designer.portrait
+
+type ResponsiveImageProps = {
+  image: ResponsiveImage
+  alt: string
+  className?: string
+  sizes: string
+  loading?: 'lazy' | 'eager'
+  fetchPriority?: 'high' | 'low' | 'auto'
+}
+
+const projectCardSizes = '(min-width: 1280px) 360px, (min-width: 768px) 45vw, 90vw'
+const heroSizes = '(min-width: 1024px) 40vw, 90vw'
+const approachSizes = '(min-width: 1024px) 32vw, 85vw'
+
+function ResponsiveImage({
+  image,
+  alt,
+  className,
+  sizes,
+  loading = 'lazy',
+  fetchPriority,
+}: ResponsiveImageProps) {
+  return (
+    <picture className="block h-full w-full">
+      <source srcSet={image.srcSetAvif} type="image/avif" sizes={sizes} />
+      <source srcSet={image.srcSetWebp} type="image/webp" sizes={sizes} />
+      <img
+        src={image.src}
+        srcSet={image.srcSet}
+        sizes={sizes}
+        alt={alt}
+        loading={loading}
+        decoding="async"
+        className={className}
+        fetchPriority={fetchPriority}
+      />
+    </picture>
+  )
+}
 
 function ProjectCard({project}: { project: Project }) {
   return (
@@ -36,10 +76,10 @@ function ProjectCard({project}: { project: Project }) {
       viewport={{once: true, amount: 0.3}}
     >
       <div className="aspect-[4/5] overflow-hidden">
-        <img
-          src={project.image}
+        <ResponsiveImage
+          image={project.image}
           alt={`${project.title} interior project`}
-          loading="lazy"
+          sizes={projectCardSizes}
           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
         />
       </div>
@@ -132,9 +172,12 @@ function App() {
               transition={{duration: 0.9, ease: easing}}
             >
               <div className="absolute -inset-6 -z-10 rounded-[48px] bg-[var(--glow)] blur-3xl"/>
-              <img
-                src={designer.portrait}
+              <ResponsiveImage
+                image={designer.portrait}
                 alt={`${designer.name} portrait`}
+                sizes={heroSizes}
+                loading="eager"
+                fetchPriority="high"
                 className="w-full rounded-[48px] border border-[var(--stroke)] object-cover shadow-soft"
               />
             </motion.div>
@@ -166,10 +209,10 @@ function App() {
               {...fadeUp}
               className="relative w-full overflow-hidden rounded-[36px] border border-[var(--stroke)] bg-white/70 shadow-soft lg:mx-auto lg:w-[60%] lg:justify-self-center"
             >
-              <img
-                src={designer.approachPortrait}
+              <ResponsiveImage
+                image={designer.approachPortrait}
                 alt={`${designer.name} portrait`}
-                loading="lazy"
+                sizes={approachSizes}
                 className="h-full w-full object-cover"
               />
             </motion.div>
