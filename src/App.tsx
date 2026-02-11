@@ -69,7 +69,7 @@ function ResponsiveImage({
 function ProjectCard({project}: { project: Project }) {
   return (
     <motion.article
-      className="group relative overflow-hidden rounded-[32px] border border-[var(--stroke)] bg-white/70 shadow-soft"
+      className="project-card relative overflow-hidden rounded-[32px] border border-[var(--stroke)] bg-white/70 shadow-soft"
       initial={{opacity: 0, y: 24}}
       whileInView={{opacity: 1, y: 0}}
       transition={{duration: 0.8, ease: easing}}
@@ -80,7 +80,7 @@ function ProjectCard({project}: { project: Project }) {
           image={project.image}
           alt={`${project.title} interior project`}
           sizes={projectCardSizes}
-          className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+          className="project-card__image h-full w-full object-cover transition duration-700"
         />
       </div>
       <div className="space-y-2 px-6 pb-7 pt-6">
@@ -89,7 +89,7 @@ function ProjectCard({project}: { project: Project }) {
         <p className="text-sm text-[var(--muted)]">{project.summary}</p>
       </div>
       <div
-        className="pointer-events-none absolute inset-0 flex items-end bg-[var(--overlay)] opacity-0 transition duration-500 group-hover:opacity-100">
+        className="project-card__overlay pointer-events-none absolute inset-0 flex items-end bg-[var(--overlay)] opacity-0 transition duration-500">
         <p className="px-6 pb-8 text-sm text-white/90">{project.summary}</p>
       </div>
     </motion.article>
