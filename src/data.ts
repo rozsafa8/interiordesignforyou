@@ -142,7 +142,7 @@ export const projects = [
         image: projectFour,
     },
     {
-        title: 'Interior Rework',
+        title: 'Furniture Refresh',
         descriptor: 'One bedroom, Palm Jumeirah',
         summary: 'Furniture refresh delivering a completely new design direction. A relaxed Balinese-inspired atmosphere brought to life.',
         image: projectSix,
