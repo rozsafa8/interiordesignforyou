@@ -1,28 +1,9 @@
-import {motion} from 'framer-motion'
 import {ArrowRight, Instagram, MapPin, MessageCircle} from 'lucide-react'
 
 import {Button} from './components/ui/button'
 import {contact, designer, projects} from './data'
 import {useEffect} from "react";
 import {captureMessage} from "./telemetry";
-
-const easing = [0.22, 1, 0.36, 1] as const
-
-const fadeUp = {
-  initial: {opacity: 0, y: 24},
-  whileInView: {opacity: 1, y: 0},
-  transition: {duration: 0.9, ease: easing},
-  viewport: {once: true, amount: 0.4},
-}
-
-const stagger = {
-  initial: {opacity: 1},
-  whileInView: {
-    opacity: 1,
-    transition: {staggerChildren: 0.12},
-  },
-  viewport: {once: true, amount: 0.2},
-}
 
 type Project = (typeof projects)[number]
 type ResponsiveImage = typeof designer.portrait
@@ -66,14 +47,12 @@ function ResponsiveImage({
   )
 }
 
-function ProjectCard({project}: { project: Project }) {
+function ProjectCard({project, index}: { project: Project; index: number }) {
   return (
-    <motion.article
+    <article
       className="project-card relative overflow-hidden rounded-[32px] border border-[var(--stroke)] bg-white/70 shadow-soft"
-      initial={{opacity: 0, y: 24}}
-      whileInView={{opacity: 1, y: 0}}
-      transition={{duration: 0.8, ease: easing}}
-      viewport={{once: true, amount: 0.3}}
+      data-animate
+      style={{transitionDelay: `${index * 0.12}s`}}
     >
       <div className="aspect-[4/5] overflow-hidden">
         <ResponsiveImage
@@ -92,13 +71,26 @@ function ProjectCard({project}: { project: Project }) {
         className="project-card__overlay pointer-events-none absolute inset-0 flex items-end bg-[var(--overlay)] opacity-0 transition duration-500">
         <p className="px-6 pb-8 text-sm text-white/90">{project.summary}</p>
       </div>
-    </motion.article>
+    </article>
   )
 }
 
 function App() {
   useEffect(() => {
-    captureMessage('page-visit');
+    captureMessage('page-visit')
+
+    const els = document.querySelectorAll<Element>('[data-animate]')
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, {threshold: 0.2})
+
+    els.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
   }, [])
 
   return (
@@ -132,12 +124,7 @@ function App() {
       <main className="space-y-24 pb-24">
         <section className="px-6 pt-20">
           <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-            <motion.div
-              className="space-y-8"
-              initial={{opacity: 0, y: 20}}
-              animate={{opacity: 1, y: 0}}
-              transition={{duration: 0.9, ease: easing}}
-            >
+            <div className="hero-fade-up space-y-8">
               <div className="space-y-4">
                 <p className="text-sm uppercase tracking-[0.3em] text-[var(--muted)]">{designer.title}</p>
                 <h1 className="text-4xl font-semibold leading-tight text-[var(--ink)] sm:text-5xl lg:text-6xl">
@@ -163,14 +150,9 @@ function App() {
                 <MapPin size={16}/>
                 <span>{designer.location}</span>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="relative"
-              initial={{opacity: 0, scale: 0.96}}
-              animate={{opacity: 1, scale: 1}}
-              transition={{duration: 0.9, ease: easing}}
-            >
+            <div className="hero-fade-scale relative">
               <div className="absolute -inset-6 -z-10 rounded-[48px] bg-[var(--glow)] blur-3xl"/>
               <ResponsiveImage
                 image={designer.portrait}
@@ -180,13 +162,13 @@ function App() {
                 fetchPriority="high"
                 className="w-full rounded-[48px] border border-[var(--stroke)] object-cover shadow-soft"
               />
-            </motion.div>
+            </div>
           </div>
         </section>
 
         <section id="about" className="px-6">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-            <motion.div {...fadeUp} className="space-y-6">
+            <div data-animate className="space-y-6">
               <div
                 className="inline-flex items-center gap-3 rounded-full border border-[var(--stroke)] bg-white/70 px-4 py-2 text-xs uppercase tracking-[0.3em] text-[var(--muted)]">
                 About the designer
@@ -203,10 +185,10 @@ function App() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              {...fadeUp}
+            <div
+              data-animate
               className="relative w-full overflow-hidden rounded-[36px] border border-[var(--stroke)] bg-white/70 shadow-soft lg:mx-auto lg:w-[60%] lg:justify-self-center"
             >
               <ResponsiveImage
@@ -215,13 +197,13 @@ function App() {
                 sizes={approachSizes}
                 className="h-full w-full object-cover"
               />
-            </motion.div>
+            </div>
           </div>
         </section>
 
         <section id="projects" className="px-6">
           <div className="mx-auto max-w-6xl space-y-10">
-            <motion.div {...fadeUp} className="flex flex-wrap items-end justify-between gap-6">
+            <div data-animate className="flex flex-wrap items-end justify-between gap-6">
               <div className="space-y-4">
                 <p className="text-xs uppercase tracking-[0.3em] text-[var(--muted)]">Featured
                   projects</p>
@@ -234,22 +216,19 @@ function App() {
                 layered materials,
                 subtle contrast, and personal storytelling.
               </p>
-            </motion.div>
-            <motion.div
-              {...stagger}
-              className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
-            >
-              {projects.map((project) => (
-                <ProjectCard key={project.title} project={project}/>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {projects.map((project, index) => (
+                <ProjectCard key={project.title} project={project} index={index}/>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         <section id="contact" className="px-6">
           <div className="mx-auto max-w-6xl">
-            <motion.div
-              {...fadeUp}
+            <div
+              data-animate
               className="relative overflow-hidden rounded-[40px] border border-[var(--stroke)] bg-[var(--ink)] px-8 py-12 text-white shadow-soft sm:px-12"
             >
               <div
@@ -309,7 +288,7 @@ function App() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
       </main>
