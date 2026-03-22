@@ -78,7 +78,7 @@ function ProjectCard({project}: { project: Project }) {
       <div className="aspect-[4/5] overflow-hidden">
         <ResponsiveImage
           image={project.image}
-          alt={`${project.title} interior project`}
+          alt={`${project.title} — ${project.descriptor} by Design by Veronika`}
           sizes={projectCardSizes}
           className="project-card__image h-full w-full object-cover transition duration-700"
         />
@@ -174,7 +174,7 @@ function App() {
               <div className="absolute -inset-6 -z-10 rounded-[48px] bg-[var(--glow)] blur-3xl"/>
               <ResponsiveImage
                 image={designer.portrait}
-                alt={`${designer.name} portrait`}
+                alt={`Veronika, interior designer based in Dubai — ${designer.name}`}
                 sizes={heroSizes}
                 loading="eager"
                 fetchPriority="high"
@@ -211,7 +211,7 @@ function App() {
             >
               <ResponsiveImage
                 image={designer.approachPortrait}
-                alt={`${designer.name} portrait`}
+                alt={`Veronika at work — boutique interior design studio, Dubai`}
                 sizes={approachSizes}
                 className="h-full w-full object-cover"
               />
