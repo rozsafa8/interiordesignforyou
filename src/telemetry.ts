@@ -1,3 +1,5 @@
+import { getConsent } from './consent'
+
 type IdleCallback = (deadline: { timeRemaining: () => number; didTimeout: boolean }) => void
 
 type IdleRequestOptions = {
@@ -50,6 +52,21 @@ export const initTelemetry = () => {
     return
   }
 
+  if (getConsent() !== 'accepted') {
+    return
+  }
+
+  scheduleIdle(() => {
+    void loadSentry()
+  })
+}
+
+/** Called by CookieBanner when the user clicks Accept. */
+export const grantAnalyticsConsent = () => {
+  if (!import.meta.env.PROD) {
+    return
+  }
+
   scheduleIdle(() => {
     void loadSentry()
   })
@@ -57,6 +74,10 @@ export const initTelemetry = () => {
 
 export const captureMessage = (message: string) => {
   if (!import.meta.env.PROD) {
+    return
+  }
+
+  if (getConsent() !== 'accepted') {
     return
   }
 

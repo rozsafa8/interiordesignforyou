@@ -1,9 +1,11 @@
 import {ArrowRight, Instagram, MapPin, MessageCircle} from 'lucide-react'
+import {Link} from 'react-router'
 
 import {Button} from './components/ui/button'
 import {contact, designer, projects} from './data'
 import {useEffect} from "react";
 import {captureMessage} from "./telemetry";
+import {CookieBanner} from "./CookieBanner";
 
 type Project = (typeof projects)[number]
 type ResponsiveImage = typeof designer.portrait
@@ -297,9 +299,19 @@ function App() {
         <div
           className="mx-auto flex max-w-6xl flex-col gap-4 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
           <span className="font-semibold text-[var(--ink)]">{designer.name}</span>
-          <span>© {new Date().getFullYear()} {designer.name}. All rights reserved.</span>
+          <div className="flex flex-wrap items-center gap-4">
+            <span>© {new Date().getFullYear()} {designer.name}. All rights reserved.</span>
+            <Link
+              to="/privacy"
+              className="underline underline-offset-2 hover:text-[var(--ink)]"
+            >
+              Privacy
+            </Link>
+          </div>
         </div>
       </footer>
+
+      <CookieBanner />
     </div>
   )
 }
