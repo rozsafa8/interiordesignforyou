@@ -31,4 +31,11 @@ function preloadHeroImagePlugin(): Plugin {
 
 export default defineConfig({
   plugins: [react(), imagetools(), preloadHeroImagePlugin()],
+  build: {
+    sourcemap: false,
+    minify: 'esbuild',
+  },
+  esbuild: {
+    drop: ['console', 'debugger'],
+  },
 })
