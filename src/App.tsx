@@ -105,15 +105,15 @@ function App() {
             <span className="text-sm font-semibold uppercase tracking-[0.32em]">{designer.name}</span>
           </div>
           <nav className="hidden items-center gap-6 text-sm text-[var(--muted)] md:flex">
-            <a href="#about" className="transition hover:text-[var(--ink)]">
-              About
-            </a>
-            <a href="#projects" className="transition hover:text-[var(--ink)]">
-              Projects
-            </a>
-            <a href="#contact" className="transition hover:text-[var(--ink)]">
-              Contact
-            </a>
+            {(['about', 'projects', 'contact'] as const).map((id) => (
+              <button
+                key={id}
+                className="capitalize transition hover:text-[var(--ink)]"
+                onClick={() => document.getElementById(id)?.scrollIntoView({behavior: 'smooth'})}
+              >
+                {id.charAt(0).toUpperCase() + id.slice(1)}
+              </button>
+            ))}
           </nav>
           <Button asChild variant="outline" size="sm" onClick={() => captureMessage('book-a-consult-click')}>
             <a href={contact.whatsappLink} target="_blank" rel="noreferrer">
@@ -135,11 +135,9 @@ function App() {
               </div>
               <p className="max-w-xl text-base text-[var(--muted)] sm:text-lg">{designer.intro}</p>
               <div className="flex flex-wrap items-center gap-4">
-                <Button asChild size="lg">
-                  <a href="#projects">
-                    View Projects
-                    <ArrowRight size={18}/>
-                  </a>
+                <Button size="lg" onClick={() => document.getElementById('projects')?.scrollIntoView({behavior: 'smooth'})}>
+                  View Projects
+                  <ArrowRight size={18}/>
                 </Button>
                 <Button asChild variant="secondary" size="lg"
                         onClick={() => captureMessage('contact-whatsapp-click')}>
